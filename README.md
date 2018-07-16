@@ -42,7 +42,7 @@ Created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible
 
 # Additional things for use with local Drupal 8
 
-#####SSH into the provisioned Vagrant instance
+##### SSH into the provisioned Vagrant instance
 
 	$ vagrant ssh
 
