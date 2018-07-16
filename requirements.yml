@@ -1,0 +1,5 @@
+---
+- src: geerlingguy.firewall
+- src: geerlingguy.java
+- src: geerlingguy.solr
+  solr_version: "6.6.0"
