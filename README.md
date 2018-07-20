@@ -42,26 +42,61 @@ Created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible
 
 # Additional things for use with local Drupal 8
 
-##### SSH into the provisioned Vagrant instance
+#### SSH into the provisioned Vagrant instance
 
 	$ vagrant ssh
 
-##### Become root
+#### Become root
 
 	$ sudo su
 
-##### Get the Search API Solr Search Drupal Module: [https://www.drupal.org/project/search_api_solr](https://www.drupal.org/project/search_api_solr)
+#### Get the Search API Solr Search Drupal Module: [https://www.drupal.org/project/search_api_solr](https://www.drupal.org/project/search_api_solr)
 
 	$ curl https://ftp.drupal.org/files/projects/search_api_solr-8.x-1.2.tar.gz | tar -xz```
 
-##### Copy Search API Solr Search module configuration into default Solr core
+#### Copy Search API Solr Search module configuration into default Solr core
 
 	$ cp -r search_api_solr/solr-conf/6.x/* /var/solr/data/collection1/conf
 
-##### Fix permissions for copied files
+#### Fix permissions for copied files
 
 	$ chown -R solr:solr /var/solr/data/collection1/conf/*
 
-##### Restart solr to apply new conf changes
+#### Restart solr to apply new conf changes
 
 	$ service solr restart
+
+#### Add the local solr search server to Search API Module
+Configuration > Search and metadata > Search API > Add Server
+
+##### Fill out the required fields:
+
+Server name: `local solr`
+
+Configure _SOLR_ Backend > Solr Connector: `Standard`
+
+Solr host: `solr`
+
+Solr port: `8938`
+
+Solr path: `/solr`
+
+Solr core: `collection1`
+
+Save
+
+##### If an index already exists, use the new local server with the existing index
+
+1.  Configuration > Search and metadata > Search API > Edit Content Index
+
+	* Scroll down to Server, select `local solr`
+
+2.	Configuration > Search and metadata > Search API > Click Content Index
+
+	* Rebuild tracking information
+
+	* Confirm
+
+	* Index Now
+
+	* Save
